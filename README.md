@@ -1,4 +1,4 @@
-# MA_Tim_Implementierung
+# RTClean
 
 This is a prototypical implementation of a concept to extract dependencies from an ontology to improve existing error detection methods.
 Those dependencies include new types upon existing _Denial Dependency_ and _Matching Dependency_:
