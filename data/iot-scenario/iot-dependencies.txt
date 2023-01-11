@@ -1,0 +1,2 @@
+t1&t2&EQ(t1.System,t2.System)&IQ(t1.Device,t2.Device)
+t1&t2&EQ(t1.Device,t2.Device)&IQ(t1.SensingDevice,t2.SensingDevice)

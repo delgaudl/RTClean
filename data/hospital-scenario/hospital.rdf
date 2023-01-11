@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE rdf:RDF [
+	<!ENTITY dct "http://purl.org/dc/terms/">
+	<!ENTITY owl "http://www.w3.org/2002/07/owl#">
+	<!ENTITY rdf "http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+	<!ENTITY rdfs "http://www.w3.org/2000/01/rdf-schema#">
+	<!ENTITY skos "http://www.w3.org/2004/02/skos/core#">
+	<!ENTITY sm "http://www.omg.org/techprocess/ab/SpecificationMetadata/">
+	<!ENTITY xsd "http://www.w3.org/2001/XMLSchema#">
+    <!ENTITY hosp "http://uni-stuttgart.de/ma-schubert/hospital/">
+]>
+<rdf:RDF xmlns:owl="http://www.w3.org/2002/07/owl#"
+	xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+	xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+	xmlns:skos="http://www.w3.org/2004/02/skos/core#"
+	xmlns:sm="http://www.omg.org/techprocess/ab/SpecificationMetadata/"
+	xmlns:dct="http://purl.org/dc/terms/"
+	xmlns:hosp="http://uni-stuttgart.de/ma-schubert/hospital/">
+	
+	<owl:Ontology>
+		<rdfs:label>Hospital Ontology</rdfs:label>
+		<dct:abstract>This ontology provides a definition of the structure of the hospital dataset.</dct:abstract>
+		<sm:contentLanguage rdf:datatype="&xsd;anyURI">https://www.w3.org/TR/owl2-quick-reference/</sm:contentLanguage>
+		<sm:copyright>Copyright (c) 2022 University of Stuttgart</sm:copyright>
+		<sm:filename>Addresses.rdf</sm:filename>
+	</owl:Ontology>
+
+    <owl:Class rdf:about="Hospital">
+		<rdfs:label>Hospital</rdfs:label>
+		<skos:definition>physical building where people who are very ill or injured are treated by doctors</skos:definition>
+		<hosp:HospitalName rdf:datatype="&xsd;string"></hosp:HospitalName>
+		<hosp:PhoneNumber rdf:datatype="&xsd;long">0</hosp:PhoneNumber>
+		<hosp:HospitalOwner rdf:datatype="&xsd;string"></hosp:HospitalOwner>
+		<hosp:ProviderNumber rdf:datatype="&xsd;nonNegativeInteger">0</hosp:ProviderNumber>
+        <rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="hasAddress"/>
+				<owl:onClass rdf:resource="Address"/>
+				<owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+        <rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="hasType"/>
+				<owl:onClass rdf:resource="HospitalType"/>
+				<owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+    </owl:Class>
+
+    <owl:Class rdf:about="Condition">
+		<rdfs:label>Condition</rdfs:label>
+		<skos:definition>the physical situation that someone or something is in</skos:definition>
+		<hosp:Condition rdf:datatype="&xsd;string"></hosp:Condition>
+        <rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="hasMeasure"/>
+				<owl:onClass rdf:resource="MeasureCode"/>
+				<owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+    </owl:Class>
+
+    <owl:Class rdf:about="MeasureCode">
+		<rdfs:label>MeasureCode</rdfs:label>
+		<skos:definition>code for condition of a person in a hospital</skos:definition>
+		<hosp:MeasureCode rdf:datatype="&xsd;string"></hosp:MeasureCode>
+		<hosp:MeasureName rdf:datatype="&xsd;string"></hosp:MeasureName>
+		<hosp:Stateavg rdf:datatype="&xsd;string"></hosp:Stateavg>
+    </owl:Class>
+
+    <owl:Class rdf:about="HospitalType">
+		<rdfs:label>HospitalType</rdfs:label>
+		<skos:definition>type of a hospital</skos:definition>
+		<hosp:HospitalType rdf:datatype="&xsd;string"></hosp:HospitalType>
+    </owl:Class>
+
+    <owl:Class rdf:about="Address">
+		<rdfs:label>Address</rdfs:label>
+		<skos:definition>a place of a building</skos:definition>
+		<hosp:Address1 rdf:datatype="&xsd;string"></hosp:Address1>
+        <rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="hasZipArea"/>
+				<owl:onClass rdf:resource="ZipArea"/>
+				<owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+    </owl:Class>
+
+    <owl:Class rdf:about="ZipArea">
+		<rdfs:label>ZipArea</rdfs:label>
+		<skos:definition>an area which is used to help organize post so that it can be delivered more quickly</skos:definition>
+		<hosp:ZipCode rdf:datatype="&xsd;nonNegativeInteger">0</hosp:ZipCode>
+        <rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="hasCity"/>
+				<owl:onClass rdf:resource="City"/>
+				<owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+        <rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="hasEmergencyService"/>
+				<owl:onClass rdf:resource="EmergencyService"/>
+				<owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+    </owl:Class>
+
+    <owl:Class rdf:about="EmergencyService">
+		<rdfs:label>EmergencyService</rdfs:label>
+		<skos:definition>the organizations that deal with accidents and urgent problems such as fire, illness, or crime</skos:definition>
+		<hosp:EmergencyService rdf:datatype="&xsd;boolean">False</hosp:EmergencyService>
+    </owl:Class>
+
+    <owl:Class rdf:about="City">
+		<rdfs:label>City</rdfs:label>
+		<skos:definition>a place where many people live</skos:definition>
+		<hosp:City rdf:datatype="&xsd;string"></hosp:City>
+        <rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="hasCountyName"/>
+				<owl:onClass rdf:resource="CountyName"/>
+				<owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+    </owl:Class>
+
+    <owl:Class rdf:about="CountyName">
+		<rdfs:label>CountyName</rdfs:label>
+		<skos:definition>the largest political division of most states in the US</skos:definition>
+		<hosp:CountyName rdf:datatype="&xsd;string"></hosp:CountyName>
+        <rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="hasState"/>
+				<owl:onClass rdf:resource="State"/>
+				<owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+    </owl:Class>
+    
+    <owl:Class rdf:about="State">
+		<rdfs:label>State</rdfs:label>
+		<skos:definition>one of the political units that the US, are divided into</skos:definition>
+		<hosp:State rdf:datatype="&xsd;string"></hosp:State>
+    </owl:Class>
+
+	<owl:ObjectProperty rdf:about="hasState">
+		<rdfs:label>has state</rdfs:label>
+		<rdfs:domain rdf:resource="CountyName"/>
+		<rdfs:range rdf:resource="State"/>
+	</owl:ObjectProperty>
+
+	<owl:ObjectProperty rdf:about="hasCountyName">
+		<rdfs:label>has CountyName</rdfs:label>
+		<rdfs:domain rdf:resource="City"/>
+		<rdfs:range rdf:resource="CountyName"/>
+	</owl:ObjectProperty>
+
+	<owl:ObjectProperty rdf:about="hasCity">
+		<rdfs:label>has city</rdfs:label>
+		<rdfs:domain rdf:resource="ZipArea"/>
+		<rdfs:range rdf:resource="City"/>
+	</owl:ObjectProperty>
+
+	<owl:ObjectProperty rdf:about="hasZipArea">
+		<rdfs:label>has zip area</rdfs:label>
+		<rdfs:domain rdf:resource="Address"/>
+		<rdfs:range rdf:resource="ZipArea"/>
+	</owl:ObjectProperty>
+
+	<owl:ObjectProperty rdf:about="hasEmergencyService">
+		<rdfs:label>has emergency service</rdfs:label>
+		<rdfs:domain rdf:resource="ZipArea"/>
+		<rdfs:range rdf:resource="EmergencyService"/>
+	</owl:ObjectProperty>
+
+	<owl:ObjectProperty rdf:about="hasEmergencyService">
+		<rdfs:label>has emergency service</rdfs:label>
+		<rdfs:domain rdf:resource="Hospital"/>
+		<rdfs:range rdf:resource="EmergencyService"/>
+	</owl:ObjectProperty>
+
+	<owl:ObjectProperty rdf:about="hasAddress">
+		<rdfs:label>has address</rdfs:label>
+		<rdfs:domain rdf:resource="Hospital"/>
+		<rdfs:range rdf:resource="Address"/>
+	</owl:ObjectProperty>
+
+	<owl:ObjectProperty rdf:about="hasType">
+		<rdfs:label>has hospital type</rdfs:label>
+		<rdfs:domain rdf:resource="Hospital"/>
+		<rdfs:range rdf:resource="HospitalType"/>
+	</owl:ObjectProperty>
+
+	<owl:ObjectProperty rdf:about="hasMeasure">
+		<rdfs:label>has measure code</rdfs:label>
+		<rdfs:domain rdf:resource="Condition"/>
+		<rdfs:range rdf:resource="MeasureCode"/>
+	</owl:ObjectProperty>
+
+</rdf:RDF>

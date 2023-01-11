@@ -1,0 +1,271 @@
+@prefix dc:          <http://purl.org/dc/elements/1.1/> .
+@prefix geo:         <http://www.w3.org/2003/01/geo/wgs84_pos#> .
+@prefix iot-context: <http://www.uni-stuttgart.de/2021/iot-context#> .
+@prefix iot-ins:     <http://www.uni-stuttgart.de/2021/iot-instance#> .
+@prefix iot-lite:    <http://purl.oclc.org/NET/UNIS/fiware/iot-lite#> .
+@prefix m3-lite:     <http://purl.org/iot/vocab/m3-lite#> .
+@prefix owl:         <http://www.w3.org/2002/07/owl#> .
+@prefix qu:          <http://purl.org/NET/ssnx/qu/qu#> .
+@prefix qu-rec20:    <http://purl.org/NET/ssnx/qu/qu-rec20#> .
+@prefix rdf:         <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:        <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix ssn:         <http://purl.oclc.org/NET/ssnx/ssn#> .
+@prefix time:        <http://www.w3.org/2006/time#> .
+@prefix xsd:         <http://www.w3.org/2001/XMLSchema#> .
+
+iot-ins:mySystem
+        rdf:type               ssn:System ;
+        rdfs:label             "MA TestSystem" ;
+        ssn:hasSubsystem  iot-ins:device_1 ;
+        ssn:hasSubsystem  iot-ins:device_2 ;
+        ssn:hasSubsystem  iot-ins:device_out ;
+        ssn:hasSubsystem  iot-ins:device_main .
+
+iot-ins:device_main
+        rdf:type               ssn:Device ;
+        rdfs:label             "device_main" ;
+        iot-lite:id            "1" ;
+        ssn:hasSubsystem       iot-ins:actuatingDevice .
+        
+iot-ins:actuatingDevice
+        rdf:type                    iot-lite:ActuatingDevice ;
+        rdfs:label                   "raspberry" .
+
+iot-ins:device_1
+        rdf:type               ssn:Device ;
+        rdfs:label             "device_in_1" ;
+        iot-lite:exposedBy     iot-ins:monitoringService_1 ;
+        iot-lite:id            "2" ;
+        ssn:hasSubsystem       iot-ins:sensingDevice_1 ;
+        ssn:hasSubsystem       iot-ins:sensingDevice_2 ;
+        iot-context:hasMonitoringComponent
+                iot-ins:1_NET_Monitor .
+
+iot-ins:device_2
+        rdf:type               ssn:Device ;
+        rdfs:label             "device_in_2" ;
+        iot-lite:exposedBy     iot-ins:monitoringService_2 ;
+        iot-lite:id            "3" ;
+        ssn:hasSubsystem       iot-ins:sensingDevice_3 ;
+        iot-context:hasMonitoringComponent
+                iot-ins:2_NET_Monitor .
+
+iot-ins:device_3
+        rdf:type               ssn:Device ;
+        rdfs:label             "device_out" ;
+        iot-lite:exposedBy     iot-ins:monitoringService_3 ;
+        iot-lite:id            "4" ;
+        ssn:hasSubsystem       iot-ins:sensingDevice_4 ;
+        iot-context:hasMonitoringComponent
+                iot-ins:3_NET_Monitor .
+
+iot-ins:sensor_1
+        rdf:type                    ssn:Sensor ;
+        rdfs:label                   "ds18b20_1" ;
+        ssn:hasMetadata             iot-ins:metadata_ds18b20_min ;
+        ssn:hasMetadata             iot-ins:metadata_ds18b20_max ;
+        ssn:hasMetadata             iot-ins:metadata_ds18b20_res ;
+        ssn:hasSensingDevice        iot-ins:sensingDevice_1 ;
+        iot-lite:hasQuantityKind    qu:Temperature ;
+        iot-lite:hasUnit            qu:degree_celsius .
+
+iot-ins:sensor_2
+        rdf:type                    ssn:Sensor ;
+        rdfs:label                   "ds18b20_2" ;
+        ssn:hasMetadata             iot-ins:metadata_ds18b20_min ;
+        ssn:hasMetadata             iot-ins:metadata_ds18b20_max ;
+        ssn:hasMetadata             iot-ins:metadata_ds18b20_res ;
+        ssn:hasSensingDevice        iot-ins:sensingDevice_2 ;
+        iot-lite:hasQuantityKind    qu:Temperature ;
+        iot-lite:hasUnit            qu:degree_celsius .
+
+iot-ins:sensor_3
+        rdf:type                    ssn:Sensor ;
+        rdfs:label                   "aqara_temp_1" ;
+        ssn:hasMetadata             iot-ins:metadata_aqara_min ;
+        ssn:hasMetadata             iot-ins:metadata_aqara_max ;
+        ssn:hasMetadata             iot-ins:metadata_aqara_res ;
+        ssn:hasSensingDevice        iot-ins:sensingDevice_3 ;
+        iot-lite:hasQuantityKind    qu:Temperature ;
+        iot-lite:hasUnit            qu:degree_celsius .
+
+iot-ins:sensor_4
+        rdf:type                    ssn:Sensor ;
+        rdfs:label                   "aqara_temp_2" ;
+        ssn:hasMetadata             iot-ins:metadata_aqara_min ;
+        ssn:hasMetadata             iot-ins:metadata_aqara_max ;
+        ssn:hasMetadata             iot-ins:metadata_aqara_res ;
+        ssn:hasSensingDevice        iot-ins:sensingDevice_4 ;
+        iot-lite:hasQuantityKind    qu:Temperature ;
+        iot-lite:hasUnit            qu:degree_celsius .
+
+iot-ins:sensingDevice_1
+        rdf:type                    ssn:SensingDevice ;
+        rdfs:label                   "esp8266_1" ;
+        ssn:hasDeployment           iot-ins:sensor_inside_1 .
+
+iot-ins:sensingDevice_2
+        rdf:type                    ssn:SensingDevice ;
+        rdfs:label                   "esp8266_2" ;
+        ssn:hasDeployment           iot-ins:sensor_inside_2 .
+
+iot-ins:sensingDevice_3
+        rdf:type                    ssn:SensingDevice ;
+        rdfs:label                   "aqara_multisensor_1" ;
+        ssn:hasDeployment           iot-ins:sensor_inside_3 .
+
+iot-ins:sensingDevice_4
+        rdf:type                    ssn:SensingDevice ;
+        rdfs:label                   "aqara_multisensor_2" ;
+        ssn:hasDeployment           iot-ins:sensor_outside .
+
+iot-ins:sensor_inside_1
+        rdf:type                    ssn:Deployment ;
+        rdfs:label                   "SensorInside" ;
+        ssn:hasLocation             iot-ins:room_1 .
+
+iot-ins:sensor_inside_2
+        rdf:type                    ssn:Deployment ;
+        rdfs:label                   "SensorInside" ;
+        ssn:hasLocation             iot-ins:room_1 .
+
+iot-ins:sensor_inside_3
+        rdf:type                    ssn:Deployment ;
+        rdfs:label                   "SensorInside" ;
+        ssn:hasLocation             iot-ins:room_2 .
+
+iot-ins:sensor_outside
+        rdf:type                    ssn:Deployment ;
+        rdfs:label                   "SensorOutside" ;
+        ssn:hasLocation             iot-ins:outside .
+
+iot-ins:room_1
+        rdf:type                    iot-lite:Object ;
+        rdfs:label                   "room1" .
+
+iot-ins:room_2
+        rdf:type                    iot-lite:Object ;
+        rdfs:label                   "room2" .
+
+iot-ins:outside
+        rdf:type                    iot-lite:Object ;
+        rdfs:label                   "outside" .
+
+iot-ins:attribute_1
+        rdf:type                    iot-lite:Attribute ;
+        rdfs:label                   "t1" ;
+        iot-lite:hasQuantityKind    qu:Temperature ;
+        iot-lite:hasAttribute       iot-ins:room_1 ;
+        iot-lite:isAssociatedWith   iot-ins:sensingDevice_1 ;
+        iot-lite:isActed            iot-ins:actuatingDevice .
+
+iot-ins:attribute_2
+        rdf:type                    iot-lite:Attribute ;
+        rdfs:label                   "t2" ;
+        iot-lite:hasQuantityKind    qu:Temperature ;
+        iot-lite:hasAttribute       iot-ins:room_1 ;
+        iot-lite:isAssociatedWith   iot-ins:sensingDevice_2 ;
+        iot-lite:isActed            iot-ins:actuatingDevice .
+
+iot-ins:attribute_3
+        rdf:type                    iot-lite:Attribute ;
+        rdfs:label                   "t3" ;
+        iot-lite:hasQuantityKind    qu:Temperature ;
+        iot-lite:hasAttribute       iot-ins:room_2 ;
+        iot-lite:isAssociatedWith   iot-ins:sensingDevice_3 ;
+        iot-lite:isActed            iot-ins:actuatingDevice .
+
+iot-ins:attribute_4
+        rdf:type                    iot-lite:Attribute ;
+        rdfs:label                   "t4" ;
+        iot-lite:hasQuantityKind    qu:Temperature ;
+        iot-lite:hasAttribute       iot-ins:outside ;
+        iot-lite:isAssociatedWith   iot-ins:sensingDevice_4 ;
+        iot-lite:isActed            iot-ins:actuatingDevice .
+
+iot-ins:metadata_ds18b20_min
+        rdf:type                    iot-lite:Metadata ;
+        rdfs:label                   "MinValue" ;
+        iot-lite:metadataType       "minValue" ;
+        iot-lite:metadataValue      "-55" .
+
+iot-ins:metadata_ds18b20_max
+        rdf:type                    iot-lite:Metadata ;
+        rdfs:label                   "MaxValue" ;
+        iot-lite:metadataType       "maxValue" ;
+        iot-lite:metadataValue      "125" .
+
+iot-ins:metadata_ds18b20_res
+        rdf:type                    iot-lite:Metadata ;
+        rdfs:label                   "Resolution" ;
+        iot-lite:metadataType       "resolution" ;
+        iot-lite:metadataValue      "12" .
+
+iot-ins:metadata_aqara_min
+        rdf:type                    iot-lite:Metadata ;
+        rdfs:label                   "MinValue" ;
+        iot-lite:metadataType       "minValue" ;
+        iot-lite:metadataValue      "-20" .
+
+iot-ins:metadata_aqara_max
+        rdf:type                    iot-lite:Metadata ;
+        rdfs:label                   "MaxValue" ;
+        iot-lite:metadataType       "maxValue" ;
+        iot-lite:metadataValue      "50" .
+
+iot-ins:metadata_aqara_res
+        rdf:type                    iot-lite:Metadata ;
+        rdfs:label                   "Resolution" ;
+        iot-lite:metadataType       "resolution" ;
+        iot-lite:metadataValue      "8" .
+
+iot-ins:monitoringService_1
+        rdf:type     ssn:Service ;
+        rdfs:label   "Telegraf" ;
+        iot-lite:id  "61f8722d8276f31664ade124" ;
+        iot-context:hasMeasurement  iot-ins:measurement_1  .
+
+iot-ins:monitoringService_2
+        rdf:type     ssn:Service ;
+        rdfs:label   "Telegraf" ;
+        iot-lite:id  "61f8722d8276f31664ade125" ;
+        iot-context:hasMeasurement  iot-ins:measurement_2  .
+
+iot-ins:monitoringService_3
+        rdf:type     ssn:Service ;
+        rdfs:label   "Telegraf" ;
+        iot-lite:id  "61f8722d8276f31664ade126" ;
+        iot-context:hasMeasurement  iot-ins:measurement_3  .
+
+iot-ins:1_NET_Monitor
+        rdf:type                    iot-context:MonitoringComponent ;
+        rdfs:label                  "NET" ;
+        iot-lite:hasQuantityKind    qu:load ;
+        iot-context:hasMeasurement  iot-ins:measurement_1  .
+
+iot-ins:2_NET_Monitor
+        rdf:type                    iot-context:MonitoringComponent ;
+        rdfs:label                  "NET" ;
+        iot-lite:hasQuantityKind    qu:load ;
+        iot-context:hasMeasurement  iot-ins:measurement_2  .
+
+iot-ins:3_NET_Monitor
+        rdf:type                    iot-context:MonitoringComponent ;
+        rdfs:label                  "NET" ;
+        iot-lite:hasQuantityKind    qu:load ;
+        iot-context:hasMeasurement  iot-ins:measurement_3  .
+
+iot-ins:measurement_1
+        rdf:type                  iot-context:Measurement ;
+        iot-context:hasTimeStamp  "2022-02-07T13:51:30.273Z"^^xsd:dateTime ;
+        iot-context:hasValue      1.9 .
+
+iot-ins:measurement_2
+        rdf:type                  iot-context:Measurement ;
+        iot-context:hasTimeStamp  "2022-02-07T13:51:30.273Z"^^xsd:dateTime ;
+        iot-context:hasValue      1 .
+
+iot-ins:measurement_3
+        rdf:type                  iot-context:Measurement ;
+        iot-context:hasTimeStamp  "2022-02-07T13:51:30.273Z"^^xsd:dateTime ;
+        iot-context:hasValue      1 .
