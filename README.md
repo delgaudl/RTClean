@@ -63,6 +63,23 @@ You need to build [error-generator](https://github.com/BigDaMa/error-generator).
 *Hint:*
 If you are running Python 3.8 and above you need to change all occurences of `time.clock()` to `time.time()`. This is a [known issue](https://github.com/HoloClean/holoclean/pull/110) of HoloClean.
 
+## Installation Guide
+
+This guide should give you an idea how to run this prototype. The following instructions show what to do to run the prototype with the Hospital dataset. 
+
+1. Clone this repository
+2. Clone [HoloClean](https://github.com/HoloClean/holoclean) to the same parent folder
+3. See [Hints for HoloClean](#run-with-holoclean) and change the code accordingly
+4. Setup HoloClean with [instructions from HoloClean-Repo](https://github.com/HoloClean/holoclean#readme). *Use Python 3.8 instead*
+6. Start Postgres DB
+7. You can try by executing `examples/holoclean_repair_example.py` in HoloClean's folder if the installation was successful
+8. Install the python packages from the [requirements](#requirements)
+9. To make sure the dependencies are extracted from the ontology (and not used from cache) delete `data/hospital-scenario/hospital-dependencies.txt`
+10. Run `validation/holoclean/holoclean_hospital.py`
+11. Results are printed to the console
+
+The execution with the IoT dataset works analogously.
+
 ## Requirements
 
 * Python (Version 3.8.x)
