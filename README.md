@@ -22,18 +22,6 @@ Contains two datasets: _Hospital_ and _IoT_:
 * Definition of a ontology loader to parse from a file or a database
 * Contains SPARQL Queries to extract dependencies from ontologies
 
-### plotter
-
-Only used for plotting results in a matplotlib figure
-
-### results
-
-Results of evaluation done along the master thesis
-
-### test
-
-Only used for parsing tests of ontologies as file or database
-
 ### validation
 
 Contains runnables to test data validation:
